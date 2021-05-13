@@ -12,7 +12,7 @@ export default function Home() {
         <Spacer y={2} />
         <Button
           auto
-          type="secondary-light"
+          type="secondary"
           icon={<Github />}
           onClick={() => signIn('github')}>
           <Text>Log in with Github</Text>
