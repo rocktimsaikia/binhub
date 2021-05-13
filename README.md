@@ -8,6 +8,11 @@
 
 <br/>
 
+https://user-images.githubusercontent.com/33410545/118172005-81e7da80-b449-11eb-9002-8e97ec88461d.mp4
+
+
+<br/>
+
 ## Motivation
 
 The main motive behind this app is that the manual way of deleting a repo is quite tedious. And if you want to bulk delete redundant/old/fork repos then it can be a frustrating process. There are other alternatives like scripts that does the same thing. But I prefer a UI while selecting what to delete because it is much more clear and just to be sure that you are not accidentally deleting any important stuff.
