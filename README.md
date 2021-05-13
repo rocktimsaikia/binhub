@@ -28,7 +28,7 @@ The main motive behind this app is that the manual way of deleting a repo is qui
 | [next](https://nextjs.org/)               |        Frontend framework        |
 | [nextauth](https://next-auth.js.org/)     |    Authentication for Nextjs     |
 | [immer](https://immerjs.github.io/immer/) |         State management         |
-| [geist-ui](https://react.geist-ui.dev/)   | UI component library originating |
+| [geist-ui](https://react.geist-ui.dev/)   | UI component library             |
 
 <br/>
 
