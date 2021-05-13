@@ -34,7 +34,7 @@ The main motive behind this app is that the manual way of deleting a repo is qui
 
 ## Setup
 
-Create a new `.env.local` file and add the required credentials included in the `.env.local.example`. \
+Create a new `.env.local` file and add the required credentials included in the `.env.template`. \
 Create an OAuth Github app manually here and grab the `GITHUB_ID` and `GITHUB_SECRET` to add to the env file.
 
 Install the dependencies
