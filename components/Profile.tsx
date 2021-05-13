@@ -108,11 +108,7 @@ export default function Profile({ name, username, image }: Props) {
   }
 
   const deleteRepo = async (owner: string, repo: string) => {
-    const res = await fetch(`/api/delete/?owner=${owner}&repo=${repo}`)
-
-    if (res.status !== 204) {
-      openToast('Could not delete the selected repos.', 'error')
-    }
+    await fetch(`/api/delete/?owner=${owner}&repo=${repo}`)
   }
 
   const deleteRepos = async () => {
