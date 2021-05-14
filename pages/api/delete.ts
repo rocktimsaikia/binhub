@@ -1,18 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import auth from 'lib/apiAuth'
-import { getAccessToken } from 'lib/accessToken'
-import { getSession } from 'next-auth/client'
+import { getToken } from 'next-auth/jwt'
+import apiAuth from 'lib/apiAuth'
 
 const deleteRepo = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getSession({ req })
-  const accessToken = await getAccessToken(session!.user.id)
+  const token = await getToken({ req, secret: process.env.JWT_SERCET })
 
   const { owner, repo } = req.query
 
   const data = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
     method: 'DELETE',
     headers: {
-      Authorization: `token ${accessToken}`
+      Authorization: `token ${token!.accessToken}`
     }
   })
 
@@ -23,4 +21,4 @@ const deleteRepo = async (req: NextApiRequest, res: NextApiResponse) => {
   res.status(204).send('Repo removed successfully')
 }
 
-export default auth(deleteRepo)
+export default apiAuth(deleteRepo)

@@ -1,16 +1,14 @@
-import auth from 'lib/apiAuth'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { RepoResponse } from 'types'
-import { getAccessToken } from 'lib/accessToken'
-import { getSession } from 'next-auth/client'
+import { getToken } from 'next-auth/jwt'
+import apiAuth from 'lib/apiAuth'
 
 const getAllRepoos = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getSession({ req })
-  const accessToken = await getAccessToken(session!.user.id)
+  const token = await getToken({ req, secret: process.env.JWT_SERCET })
 
   const data = await fetch('https://api.github.com/user/repos', {
     headers: {
-      Authorization: `token ${accessToken}`
+      Authorization: `token ${token!.accessToken}`
     }
   })
 
@@ -35,6 +33,7 @@ const getAllRepoos = async (req: NextApiRequest, res: NextApiResponse) => {
       fork
     })
   )
+
   // sort by date oldest to newest
   // .sort(
   //   (r1: RepoResponse, r2: RepoResponse) =>
@@ -44,4 +43,4 @@ const getAllRepoos = async (req: NextApiRequest, res: NextApiResponse) => {
   res.status(200).json(filteredRepos)
 }
 
-export default auth(getAllRepoos)
+export default apiAuth(getAllRepoos)

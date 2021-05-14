@@ -23,7 +23,7 @@ export default NextAuth({
   },
 
   callbacks: {
-    jwt: async (token, user: User, _acount, profile: Profile) => {
+    jwt: async (token, user: User, account, profile: Profile) => {
       if (!user?.id) return token
 
       let dbUser = await getUserFromId(user.id)
@@ -32,7 +32,12 @@ export default NextAuth({
         dbUser = await updateUser(user.id, profile.login)
       }
 
-      const response = { ...token, id: user.id, username: dbUser.username }
+      const response = {
+        ...token,
+        id: user.id,
+        username: dbUser.username,
+        accessToken: account?.accessToken
+      }
 
       return response
     },

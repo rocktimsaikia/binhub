@@ -7,7 +7,7 @@ import Layout from 'components/Layout'
 export default function Home() {
   return (
     <Layout>
-      <Page.Content style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center', marginTop: '100px' }}>
         <Image src="/image/binhub.png" height="100" width="300" />
         <Text h4>Bulk removing github repositories made easy.</Text>
         <Spacer y={2} />
@@ -22,7 +22,7 @@ export default function Home() {
           }>
           <Text>Log in with Github</Text>
         </Button>
-      </Page.Content>
+      </div>
     </Layout>
   )
 }
