@@ -193,7 +193,7 @@ export default function Profile({ name, username, image }: Props) {
             Sign out
           </Button>
           <Button
-            type="error-light"
+            type="error"
             icon={<Trash2 />}
             onClick={() => setModalVisible(true)}>
             Delete {selectedReps.length || null}

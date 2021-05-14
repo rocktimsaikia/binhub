@@ -1,8 +1,28 @@
-import { Page, Text, Button, Spacer } from '@geist-ui/react'
+import { Text, Button, Spacer } from '@geist-ui/react'
 import { Github } from '@geist-ui/react-icons'
 import { signIn } from 'next-auth/client'
 import Image from 'next/image'
 import Layout from 'components/Layout'
+import { getSession } from 'next-auth/client'
+import { GetServerSideProps } from 'next'
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  // Get the user's session based on the request
+  const session = await getSession({ req })
+
+  if (!session) {
+    return {
+      props: { session }
+    }
+  }
+
+  return {
+    redirect: {
+      destination: '/profile',
+      permanent: false
+    }
+  }
+}
 
 export default function Home() {
   return (
