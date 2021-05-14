@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import auth from 'lib/auth'
+import auth from 'lib/apiAuth'
 import { getAccessToken } from 'lib/accessToken'
 import { getSession } from 'next-auth/client'
 

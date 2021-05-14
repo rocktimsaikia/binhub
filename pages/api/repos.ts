@@ -1,4 +1,4 @@
-import auth from 'lib/auth'
+import auth from 'lib/apiAuth'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { RepoResponse } from 'types'
 import { getAccessToken } from 'lib/accessToken'

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import RepoCard from 'components/RepoCard'
+import Repo from 'components/Repo'
 import { Trash2, LogOut } from '@geist-ui/react-icons'
 import { signOut } from 'next-auth/client'
 import { useImmerReducer } from 'use-immer'
@@ -185,7 +185,9 @@ export default function Profile({ name, username, image }: Props) {
           <Button
             auto
             icon={<LogOut />}
-            onClick={() => signOut()}
+            onClick={() =>
+              signOut({ callbackUrl: `${window.location.origin}/` })
+            }
             style={{ marginRight: '20px' }}>
             Sign out
           </Button>
@@ -217,7 +219,7 @@ export default function Profile({ name, username, image }: Props) {
         <RepoContext.Provider value={{ dispatch }}>
           <div>
             {state.repos.map((repo) => (
-              <RepoCard key={repo.name} {...repo} />
+              <Repo key={repo.name} {...repo} />
             ))}
           </div>
         </RepoContext.Provider>
