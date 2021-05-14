@@ -1,14 +1,35 @@
-import { useSession } from 'next-auth/client'
+import { getSession } from 'next-auth/client'
 import Profile from 'components/Profile'
 import Layout from 'components/Layout'
-import ErrorPage from 'components/Unauthorized'
+import { GetServerSideProps, NextPage } from 'next'
+import { Session } from 'next-auth'
 
-export default function Home() {
-  const [session] = useSession()
+interface Props {
+  session: Session
+}
 
+export const getServerSideProps: GetServerSideProps<Props> = async ({
+  req
+}) => {
+  const session = await getSession({ req })
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: { session }
+  }
+}
+
+const Home: NextPage<Props> = ({ session }) => {
   return (
     <Layout>
-      {!session && <ErrorPage />}
       {session && (
         <Profile
           name={session.user.name}
@@ -19,3 +40,5 @@ export default function Home() {
     </Layout>
   )
 }
+
+export default Home
