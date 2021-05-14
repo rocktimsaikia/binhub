@@ -19,7 +19,8 @@ import {
   Page,
   Select,
   useModal,
-  useToasts
+  useToasts,
+  Grid
 } from '@geist-ui/react'
 
 interface State {
@@ -152,7 +153,7 @@ export default function Profile({ name, username, image }: Props) {
   }
 
   return (
-    <Page.Content style={{ width: '600px', margin: '0 auto' }}>
+    <>
       <Modal {...bindings}>
         <Modal.Title>Are you sure?</Modal.Title>
 
@@ -217,13 +218,15 @@ export default function Profile({ name, username, image }: Props) {
 
       {state.repos && (
         <RepoContext.Provider value={{ dispatch }}>
-          <div>
+          <Grid.Container gap={2}>
             {state.repos.map((repo) => (
-              <Repo key={repo.name} {...repo} />
+              <Grid xs={12}>
+                <Repo key={repo.name} {...repo} />
+              </Grid>
             ))}
-          </div>
+          </Grid.Container>
         </RepoContext.Provider>
       )}
-    </Page.Content>
+    </>
   )
 }
