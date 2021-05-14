@@ -1,48 +1,28 @@
-import { Button, Page, Link, Text } from '@geist-ui/react'
-import { Github, Coffee } from '@geist-ui/react-icons'
-import { signIn, useSession } from 'next-auth/client'
-import Profile from 'components/Profile'
-import HomePage from 'components/Home'
+import { Page, Text, Button, Spacer } from '@geist-ui/react'
+import { Github } from '@geist-ui/react-icons'
+import { signIn } from 'next-auth/client'
+import Image from 'next/image'
+import Layout from 'components/Layout'
 
 export default function Home() {
-  const [session] = useSession()
-
   return (
-    <Page dotBackdrop>
-      {!session && <HomePage />}
-      {session && (
-        <Profile
-          name={session.user.name}
-          username={session.user.username}
-          image={session.user.image}
-        />
-      )}
-
-      <Page.Footer
-        style={{
-          textAlign: 'center',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '10px'
-        }}>
-        <Text>
-          Created by{' '}
-          <Link color href="https://github.com/rocktimsaikia">
-            @rocktimsaikia
-          </Link>{' '}
-          &copy; 2021 |
-        </Text>
-
-        <Link
-          href="https://github.com/rocktimsaikia/binhub"
-          style={{ marginRight: '10px' }}>
-          <Github size={20} />
-        </Link>
-        <Link href="https://buymeacoffee.com/rocktimcodes">
-          <Coffee />
-        </Link>
-      </Page.Footer>
-    </Page>
+    <Layout>
+      <Page.Content style={{ textAlign: 'center' }}>
+        <Image src="/image/binhub.png" height="100" width="300" />
+        <Text h4>Bulk removing github repositories made easy.</Text>
+        <Spacer y={2} />
+        <Button
+          auto
+          type="secondary"
+          icon={<Github />}
+          onClick={() =>
+            signIn('github', {
+              callbackUrl: `${window.location.origin}/profile`
+            })
+          }>
+          <Text>Log in with Github</Text>
+        </Button>
+      </Page.Content>
+    </Layout>
   )
 }
