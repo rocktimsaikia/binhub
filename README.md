@@ -1,5 +1,5 @@
 <br/>
-<a href="https://binhub.com">
+<a href="https://binhub.vercel.app/">
   <p align="center">
       <img height=90 src="https://user-images.githubusercontent.com/33410545/118024876-d1140980-b37c-11eb-8fe4-481144756b0f.png">
     </p>
