@@ -28,11 +28,11 @@ export default function Layout<T>(props: PropsWithChildren<T>) {
         <meta content={meta.description} name="description" />
         <meta
           property="og:url"
-          content={`https://binhub.vercel.app/${router.asPath}`}
+          content={`https://binhub.vercel.app${router.asPath}`}
         />
         <link
           rel="canonical"
-          href={`https://binhub.vercel.app/${router.asPath}`}
+          href={`https://binhub.vercel.app${router.asPath}`}
         />
         <meta property="og:site_name" content="Rocktim Saikia" />
         <meta property="og:description" content={meta.description} />
