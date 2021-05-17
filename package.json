@@ -15,7 +15,7 @@
     "mongodb": "^3.6.6",
     "next": "10.2.0",
     "next-auth": "^3.20.1",
-    "p-map-lite": "^1.1.2",
+    "p-iteration": "^1.1.8",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "use-immer": "^0.5.1"

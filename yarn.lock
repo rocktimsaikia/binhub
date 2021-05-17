@@ -1685,6 +1685,11 @@ os-browserify@0.3.0, os-browserify@^0.3.0:
   resolved "https://registry.yarnpkg.com/os-browserify/-/os-browserify-0.3.0.tgz#854373c7f5c2315914fc9bfc6bd8238fdda1ec27"
   integrity sha1-hUNzx/XCMVkU/Jv8a9gjj92h7Cc=
 
+p-iteration@^1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/p-iteration/-/p-iteration-1.1.8.tgz#14df726d55af368beba81bcc92a26bb1b48e714a"
+  integrity sha512-IMFBSDIYcPNnW7uWYGrBqmvTiq7W0uB0fJn6shQZs7dlF3OvrHOre+JT9ikSZ7gZS3vWqclVgoQSvToJrns7uQ==
+
 p-limit@3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/p-limit/-/p-limit-3.1.0.tgz#e1daccbe78d0d1388ca18c64fea38e3e57e3706b"
@@ -1705,11 +1710,6 @@ p-locate@^4.1.0:
   integrity sha512-R79ZZ/0wAxKGu3oYMlz8jy/kbhsNrS7SKZ7PxEHBgJ5+F2mtFW2fK2cOtBh1cHYkQsbzFV7I+EoRKe6Yt0oK7A==
   dependencies:
     p-limit "^2.2.0"
-
-p-map-lite@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/p-map-lite/-/p-map-lite-1.1.2.tgz#af6065fe33cfc1c9a9839f332c3609682ec3c4e2"
-  integrity sha512-28fZiFScPMic0ESI8Yu/cN6vOY5+GTfJ4eSW/oIe+IsjKUKjLGg0VBvr4iuBl4W7Hv8s0ZaVk0PKlgmdpFwYdA==
 
 p-try@^2.0.0:
   version "2.2.0"

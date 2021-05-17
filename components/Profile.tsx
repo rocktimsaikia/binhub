@@ -5,7 +5,6 @@ import { signOut } from 'next-auth/client'
 import { useImmerReducer } from 'use-immer'
 import { SingleRepo, ReducerAction } from 'types'
 import { RepoContext } from 'context/RepoContext'
-import pMap from 'p-map-lite'
 import { NormalTypes } from '@geist-ui/react/dist/utils/prop-types'
 import {
   Spacer,
@@ -22,6 +21,7 @@ import {
   useToasts,
   Grid
 } from '@geist-ui/react'
+import { forEach } from 'p-iteration'
 
 interface State {
   initialRepos: SingleRepo[]
@@ -108,20 +108,21 @@ export default function Profile({ name, username, image }: Props) {
     dispatch({ type: 'loading', isloading: false })
   }
 
-  const deleteRepo = async (owner: string, repo: string) => {
-    await fetch(`/api/delete/?owner=${owner}&repo=${repo}`)
-  }
-
   const deleteRepos = async () => {
     dispatch({ type: 'deleting' })
 
-    const selectedRepos = state!.repos.filter((repo) => repo.selected)
-    await pMap(selectedRepos, async ({ owner, name }) => {
-      await deleteRepo(owner, name)
+    const selected = state!.repos.filter((repo) => repo.selected)
+
+    await forEach(selected, async ({ owner, name }) => {
+      try {
+        await fetch(`/api/delete/?owner=${owner}&repo=${name}`)
+      } catch (error) {
+        openToast(`Cound not delete "${owner}/${name}"`, 'error')
+      }
     })
 
     dispatch({ type: 'success' })
-    openToast('Successfully deleted the selected repos.', 'success')
+    openToast('Selected repos has been deleted.', 'success')
     setModalVisible(false)
   }
 
