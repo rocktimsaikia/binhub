@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import Repo from 'components/Repo'
-import { Trash2, LogOut } from '@geist-ui/react-icons'
+import { Trash2, LogOut, AlertTriangleFill } from '@geist-ui/react-icons'
+
 import { signOut } from 'next-auth/client'
 import { useImmerReducer } from 'use-immer'
 import { SingleRepo, ReducerAction } from 'types'
@@ -15,7 +16,6 @@ import {
   Modal,
   Link,
   Divider,
-  Page,
   Select,
   useModal,
   useToasts,
@@ -156,7 +156,13 @@ export default function Profile({ name, username, image }: Props) {
   return (
     <>
       <Modal {...bindings}>
-        <Modal.Title>Are you sure?</Modal.Title>
+        <Modal.Title>
+          <Text h3>Delete repos</Text>
+        </Modal.Title>
+        <Text size={14}>
+          You are going to delete the following repos.
+          <br /> Are you sure ?
+        </Text>
 
         <Modal.Content>
           <ol>
@@ -170,10 +176,14 @@ export default function Profile({ name, username, image }: Props) {
           </ol>
         </Modal.Content>
         <Modal.Action passive onClick={() => setModalVisible(false)}>
-          Cancel
+          <Text b>No, Go back.</Text>
         </Modal.Action>
-        <Modal.Action loading={state.isDeleting} onClick={deleteRepos}>
-          Delete
+        <Modal.Action
+          loading={state.isDeleting}
+          onClick={deleteRepos}
+          style={{ color: '#FF3F56' }}>
+          <AlertTriangleFill color="#FF3F56" size="18" /> <Spacer x={0.5} />{' '}
+          <Text b>Yes, Delete!</Text>
         </Modal.Action>
       </Modal>
 
