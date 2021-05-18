@@ -1,13 +1,12 @@
 import { PropsWithChildren } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { Page, Link, Text, Image } from '@geist-ui/react'
+import { Page, Link, Text, Image, Spacer, Button } from '@geist-ui/react'
 
 interface Meta {
   title: string
   description: string
   image: string
-  date?: string
 }
 
 export default function Layout<T>(props: PropsWithChildren<T>) {
@@ -43,9 +42,6 @@ export default function Layout<T>(props: PropsWithChildren<T>) {
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
-        {meta.date && (
-          <meta property="article:published_time" content={meta.date} />
-        )}
       </Head>
       <Page style={{ padding: 0 }}>
         <Page.Header
@@ -65,10 +61,13 @@ export default function Layout<T>(props: PropsWithChildren<T>) {
               style={{ marginRight: '25px' }}>
               <Text type="secondary">Github</Text>
             </Link>
-
-            <Link href="https://buymeacoffee.com/rocktimcodes">
-              <Text type="secondary">Support</Text>
-            </Link>
+            <Button auto>
+              <Link href="https://buymeacoffee.com/rocktimcodes">
+                <Image src="/buymeacoffee.png" height={15} width={15} />
+                <Spacer x={0.2} />
+                <Text>Buy me a coffee</Text>
+              </Link>
+            </Button>
           </div>
         </Page.Header>
         <Page.Content>{props.children}</Page.Content>

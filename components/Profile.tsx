@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import Repo from 'components/Repo'
 import { Trash2, LogOut, AlertTriangleFill } from '@geist-ui/react-icons'
-
 import { signOut } from 'next-auth/client'
 import { useImmerReducer } from 'use-immer'
-import { SingleRepo, ReducerAction } from 'types'
-import { RepoContext } from 'context/RepoContext'
+import { reducer } from 'state/Reducer'
+import { SingleRepo } from 'types'
+import { RepoContext } from 'state/RepoContext'
 import { NormalTypes } from '@geist-ui/react/dist/utils/prop-types'
 import {
   Spacer,
@@ -21,9 +21,8 @@ import {
   useToasts,
   Grid
 } from '@geist-ui/react'
-import { forEach } from 'p-iteration'
 
-interface State {
+export interface State {
   initialRepos: SingleRepo[]
   repos: SingleRepo[]
   success: string
@@ -45,54 +44,8 @@ interface Props {
   image: string
 }
 
-const repoReducer = (draft: State, action: ReducerAction): void => {
-  switch (action.type) {
-    case 'setRepos':
-      draft.repos = action.repos!.map((repo) => ({ ...repo, selected: false }))
-      // Setting a initial constant repos state for filtering
-      draft.initialRepos = action.repos!.map((repo) => ({
-        ...repo,
-        selected: false
-      }))
-      return
-
-    case 'loading':
-      draft.isLoading = action.isloading!
-      return
-
-    case 'updateRepos':
-      draft.repos = action.repos!
-      return
-
-    case 'toggleSelect':
-      const repo = draft.repos.find((repo) => repo.name === action.payload)
-      // update initialstate repos too
-      const storedRepo = draft.initialRepos.find(
-        (repo) => repo.name === action.payload
-      )
-
-      storedRepo!.selected = !storedRepo!.selected
-      repo!.selected = !repo!.selected
-      return
-
-    case 'success':
-      draft.isDeleting = false
-      draft.repos = draft.repos.filter((repo) => !repo.selected)
-      // Also updating the inital repos state after a successfull deletetion
-      draft.initialRepos = draft.initialRepos.filter((repo) => !repo.selected)
-      return
-
-    case 'deleting':
-      draft.isDeleting = true
-      return
-
-    default:
-      break
-  }
-}
-
 export default function Profile({ name, username, image }: Props) {
-  const [state, dispatch] = useImmerReducer(repoReducer, initialState)
+  const [state, dispatch] = useImmerReducer(reducer, initialState)
 
   const { visible, setVisible: setModalVisible, bindings } = useModal()
   const [, setToast] = useToasts()
@@ -113,7 +66,7 @@ export default function Profile({ name, username, image }: Props) {
 
     const selected = state!.repos.filter((repo) => repo.selected)
 
-    await forEach(selected, async ({ owner, name }) => {
+    selected.forEach(async ({ owner, name }) => {
       try {
         await fetch(`/api/delete/?owner=${owner}&repo=${name}`)
       } catch (error) {
@@ -205,6 +158,7 @@ export default function Profile({ name, username, image }: Props) {
           </Button>
           <Button
             type="error"
+            auto
             icon={<Trash2 />}
             onClick={() => setModalVisible(true)}>
             Delete {selectedReps.length || null}

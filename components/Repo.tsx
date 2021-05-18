@@ -2,7 +2,7 @@ import { Card, Link, Text, Tag, Tooltip } from '@geist-ui/react'
 import { Folder } from '@geist-ui/react-icons'
 import { useContext } from 'react'
 import { SingleRepo } from 'types'
-import { RepoContext } from 'context/RepoContext'
+import { RepoContext } from 'state/RepoContext'
 import { format } from 'date-fns'
 
 export default function RepoCard({
@@ -20,9 +20,13 @@ export default function RepoCard({
     <Card
       type={selected ? 'warning' : 'default'}
       shadow
-      style={{ marginBottom: '40px' }}>
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        marginBottom: '40px'
+      }}>
       <Card.Content
-        style={{ cursor: 'pointer' }}
+        style={{ flex: 1, cursor: 'pointer' }}
         onClick={() => dispatch({ type: 'toggleSelect', payload: name })}>
         <Folder size={20} />
         <Text h4>{name}</Text>
