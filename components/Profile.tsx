@@ -19,7 +19,9 @@ import {
   Select,
   useModal,
   useToasts,
-  Grid
+  Grid,
+  Avatar,
+  Popover
 } from '@geist-ui/react'
 
 export interface State {
@@ -106,6 +108,22 @@ export default function Profile({ name, username, image }: Props) {
     }
   }
 
+  const content = (name: string, username: string) => (
+    <>
+      <Popover.Item>
+        <Button
+          auto
+          type="secondary"
+          ghost
+          icon={<LogOut />}
+          onClick={() => signOut({ callbackUrl: `${window.location.origin}/` })}
+          style={{ marginRight: '20px' }}>
+          Sign out
+        </Button>
+      </Popover.Item>
+    </>
+  )
+
   return (
     <>
       <Modal {...bindings}>
@@ -140,39 +158,42 @@ export default function Profile({ name, username, image }: Props) {
         </Modal.Action>
       </Modal>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <User src={image} name={name}>
-          <User.Link href={`https://github.com/${username}`}>
-            @{username}
-          </User.Link>
-        </User>
-        <div>
-          <Button
-            auto
-            icon={<LogOut />}
-            onClick={() =>
-              signOut({ callbackUrl: `${window.location.origin}/` })
-            }
-            style={{ marginRight: '20px' }}>
-            Sign out
-          </Button>
-          <Button
-            type="error"
-            auto
-            icon={<Trash2 />}
-            onClick={() => setModalVisible(true)}>
-            Delete {selectedReps.length || null}
-          </Button>
-        </div>
-      </div>
-      <Spacer y={4} />
+      <div style={{ textAlign: 'center' }}>
+        <Popover
+          content={() => content(name, username)}
+          placement="right"
+          style={{ cursor: 'pointer' }}>
+          <Avatar
+            src={image}
+            size="medium"
+            style={{ border: '2px solid orange' }}
+          />
+        </Popover>
 
-      <Divider>
-        <Select placeholder="Filter" onChange={filterRepos}>
+        <Text h3>{name}</Text>
+        <Text small>
+          <Link color href={`https://github.com/${username}`}>
+            @{username}
+          </Link>
+        </Text>
+      </div>
+      <Spacer y={2} />
+
+      <Divider volume={20} align="end">
+        <Select placeholder="Filter" onChange={filterRepos} size="small">
           <Select.Option value="all">All</Select.Option>
           <Select.Option value="fork">Fork</Select.Option>
           <Select.Option value="private">Private</Select.Option>
         </Select>
+        <Spacer x={1} />
+        <Button
+          type="error"
+          auto
+          icon={<Trash2 />}
+          size="small"
+          onClick={() => setModalVisible(true)}>
+          Delete {selectedReps.length || null}
+        </Button>
       </Divider>
       <Spacer y={2} />
 
