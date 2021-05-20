@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@800&display=swap');
+
+.header-title {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 46px;
+  color: rgb(49, 49, 49);
+}
+.light-underline {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+.light-underline::before {
+  content: '';
+  height: 1rem;
+  background-color: #ff3f56;
+  width: calc(100% + 0.5rem);
+  left: -0.25rem;
+  bottom: 0.4rem;
+  display: block;
+  position: absolute;
+  transform: rotate(-1deg) skewX(-1deg);
+  z-index: -1;
+}

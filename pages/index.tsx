@@ -1,4 +1,4 @@
-import { Text, Button, Spacer } from '@geist-ui/react'
+import { Text, Button, Spacer, Grid, Display } from '@geist-ui/react'
 import { Github } from '@geist-ui/react-icons'
 import { signIn } from 'next-auth/client'
 import Image from 'next/image'
@@ -27,9 +27,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 export default function Home() {
   return (
     <Layout>
-      <div style={{ textAlign: 'center', marginTop: '100px' }}>
-        <Image src="/image/binhub.png" height="100" width="300" />
-        <Text h4>Bulk removing github repositories made easy.</Text>
+      <Spacer y={4} />
+      <div style={{ textAlign: 'center' }}>
+        <h1 className="header-title">
+          <span className="light-underline">Bulk removing</span> github
+          <br /> repositories <span className="light-underline">made easy</span>
+          .
+        </h1>
         <Spacer y={2} />
         <Button
           auto
@@ -40,7 +44,7 @@ export default function Home() {
               callbackUrl: `${window.location.origin}/profile`
             })
           }>
-          <Text>Log in with Github</Text>
+          Login with Github
         </Button>
       </div>
     </Layout>
