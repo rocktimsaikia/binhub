@@ -88,7 +88,11 @@ export default function Layout<T>(props: PropsWithChildren<T>) {
         <Page.Footer style={{ textAlign: 'center', padding: '10px 0' }}>
           <Text small b type="secondary">
             Created by{' '}
-            <Link color href="https://github.com/rocktimsaikia">
+            <Link
+              color
+              href="https://github.com/rocktimsaikia"
+              target="_blank"
+              rel="noopener">
               @rocktimsaikia
             </Link>{' '}
             &copy; 2021 - Present
