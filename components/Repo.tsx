@@ -35,8 +35,10 @@ export default function RepoCard({
 
       <Card.Footer style={{ border: 'none' }}>
         <Link
-          href="https://github.com/rocktimsaikia/binhub"
-          style={{ marginRight: '15px' }}>
+          href={html_url}
+          style={{ marginRight: '15px' }}
+          target="_blank"
+          rel="noopener">
           <svg
             aria-hidden="true"
             focusable="false"
