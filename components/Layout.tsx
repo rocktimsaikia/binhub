@@ -86,7 +86,7 @@ export default function Layout<T>(props: PropsWithChildren<T>) {
         </Page.Header>
         <Page.Content>{props.children}</Page.Content>
         <Page.Footer style={{ textAlign: 'center', padding: '10px 0' }}>
-          <Text small b type="secondary">
+          <Text size={12} b>
             Created by{' '}
             <Link
               color
